@@ -23,6 +23,7 @@
     .simon-square{
         aspect-ratio: 1/1;
         max-height: 500px;
+        cursor: pointer;
         &.red{
             background-color: red;
         }
