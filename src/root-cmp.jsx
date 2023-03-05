@@ -7,16 +7,25 @@ import { useEffect, useState } from 'react';
 
 function App() {
   const [colors, setColors] = useState([])
+  const [currColor, setCurrColor] = useState(null)
+  const [isPlaying, setIsPlaying] = useState(true)
   const pressedColors = []
+  
+
 
   useEffect(() => {
     startGame() 
 }, [])
 
+useEffect(() => {
+  showCurrColors()
+}, [colors])
+
 function startGame(){
+  setIsPlaying(true)
   const color = gameService.getColor()
   console.log('color:',color)
-  setColors(prevState => [...prevState, color])
+  setColors([color])
 }
 
 function checkAnswer(val){
@@ -27,24 +36,37 @@ function checkAnswer(val){
   }
 }
 
+function showCurrColors(){
+  colors.forEach(color => {
+    setTimeout(() => {
+      setCurrColor(color)
+    }, 1000)
+
+  })
+}
+
 function failure(){
   console.log('YOU SUCK');
+  setIsPlaying(false)
 }
 
 function levelUp(){
-  startGame()
+  const color = gameService.getColor()
+  console.log('color:',color)
+  setColors(prevState => [...prevState, color])
   console.log('YOU GREAT');
 
 }
 
   return <div className="app main-layout">
       <h1>The Simon Game</h1>
-      <button onClick={startGame}>Start Game</button>
+      <h1>{isPlaying ? `Score: ${colors.length - 1}` : `Wrong!, your score was ${colors.length - 1}`}</h1>
+      {!isPlaying && <button onClick={startGame}>Restart</button>}
       <div className='simon-container'>
-        <div className='simon-square red' onClick={() => checkAnswer('red')}></div>
-        <div className='simon-square green' onClick={() => checkAnswer('green')}></div>
-        <div className='simon-square blue' onClick={() => checkAnswer('blue')}></div>
-        <div className='simon-square yellow' onClick={() => checkAnswer('yellow')}></div>
+        <div className={`simon-square red ${currColor === 'red' ? 'curr-color' : ''}`} onClick={() => checkAnswer('red')}></div>
+        <div className={`simon-square green ${currColor === 'red' ? 'curr-color' : ''}`} onClick={() => checkAnswer('green')}></div>
+        <div className={`simon-square blue ${currColor === 'red' ? 'curr-color' : ''}`} onClick={() => checkAnswer('blue')}></div>
+        <div className={`simon-square yellow ${currColor === 'red' ? 'curr-color' : ''}`} onClick={() => checkAnswer('yellow')}></div>
       </div>
     </div>
   
