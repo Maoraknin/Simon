@@ -1,0 +1,39 @@
+.main-layout {
+    display: grid;
+    grid-template-columns: 20px 1fr 20px;
+
+    > * {
+        grid-column: 2;
+    }
+
+    > *.full {
+        grid-column: 1 / -1;
+    }
+}
+
+.app{
+    justify-items: center;
+    .simon-container{
+        display: grid;
+        grid-template-rows:repeat(2, minmax(150px, 300px));
+        grid-template-columns:repeat(2, minmax(150px, 300px));
+        gap: 20px;
+    }
+
+    .simon-square{
+        aspect-ratio: 1/1;
+        max-height: 500px;
+        &.red{
+            background-color: red;
+        }
+        &.blue{
+            background-color: blue;
+        }
+        &.green{
+            background-color: green;
+        }
+        &.yellow{
+            background-color: yellow;
+        }
+    }
+}
