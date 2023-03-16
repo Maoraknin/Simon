@@ -2,42 +2,80 @@
     display: grid;
     grid-template-columns: 20px 1fr 20px;
 
-    > * {
+    >* {
         grid-column: 2;
     }
 
-    > *.full {
+    >*.full {
         grid-column: 1 / -1;
     }
 }
 
-.app{
+.app {
     justify-items: center;
-    .simon-container{
+
+    .simon-container {
         display: grid;
-        grid-template-rows:repeat(2, minmax(150px, 300px));
-        grid-template-columns:repeat(2, minmax(150px, 300px));
+        grid-template-rows: repeat(2, minmax(150px, 300px));
+        grid-template-columns: repeat(2, minmax(150px, 300px));
         gap: 20px;
     }
 
-    .simon-square{
-        aspect-ratio: 1/1;
-        max-height: 500px;
-        cursor: pointer;
-        &.red{
-            background-color: red;
+    .simon-container {
+
+
+        .simon-square {
+            aspect-ratio: 1/1;
+            max-height: 500px;
+            cursor: pointer;
+
+            &.red {
+                background-color: red;
+            }
+
+            &.blue {
+                background-color: blue;
+            }
+
+            &.green {
+                background-color: green;
+            }
+
+            &.yellow {
+                background-color: yellow;
+            }
         }
-        &.blue{
-            background-color: blue;
+
+        &.red {
+            .simon-square{
+                &.red{
+                    background-color: gray
+                }
+            }
         }
-        &.green{
-            background-color: green;
+
+        &.blue {
+            .simon-square{
+                &.blue{
+                    background-color: gray; 
+                }
+            }
         }
-        &.yellow{
-            background-color: yellow;
+
+        &.green {
+            .simon-square{
+                &.green{
+                    background-color: gray;
+                }
+            }
         }
-        &.curr-color{
-            background-color: lightgray;
+
+        &.yellow {
+            .simon-square{
+                &.yellow{
+                    background-color: gray;
+                }
+            }
         }
     }
 }
